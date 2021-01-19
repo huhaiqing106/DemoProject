@@ -1,9 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyjsPlugin = require('uglifyjs-webpack-plugin');
+// const UglifyjsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 /**
  * @type {import('webpack').Configuration}
@@ -120,7 +121,11 @@ module.exports = {
 				cssProcessorOptions: { safe: true, discardComments: { removeAll: true } },
 				canPrint: true,
 			}),
-			new UglifyjsPlugin({
+			new TerserPlugin({
+				exclude: /\/node_modules/,
+			}),
+
+			/* new UglifyjsPlugin({
 				uglifyOptions: {
 					output: {
 						beautify: false, // 不格式化
@@ -130,7 +135,7 @@ module.exports = {
 						drop_console: true, // 去除打印语句
 					},
 				},
-			}),
+			}), */
 		],
 	},
 };

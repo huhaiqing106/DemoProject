@@ -9,4 +9,4 @@ const prodConfig = {
 	mode: 'production',
 };
 
-module.exports = webpackMerge(baseConfig, prodConfig);
+module.exports = webpackMerge.merge(baseConfig, prodConfig);
